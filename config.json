@@ -1,0 +1,32 @@
+{
+  "urls": {
+    "production": "https://nexopdv.emasoftware.io/",
+    "development": "http://localhost:5173/",
+    "homologation": "https://homolog.nexopdv.emasoftware.io/"
+  },
+  "defaultEnvironment": "production",
+  "hardware": {
+    "printer": {
+      "enabled": true,
+      "defaultPrinter": "",
+      "type": "epson",
+      "interface": "printer"
+    },
+    "scale": {
+      "enabled": true,
+      "port": "COM1",
+      "baudRate": 9600,
+      "dataBits": 8,
+      "stopBits": 1,
+      "parity": "none"
+    }
+  },
+  "app": {
+    "title": "Nexo PDV",
+    "fullscreen": true,
+    "width": 1280,
+    "height": 800,
+    "autoHideMenuBar": true,
+    "kiosk": false
+  }
+}

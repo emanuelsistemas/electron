@@ -1,0 +1,39 @@
+{
+  "name": "nexo-pdv-electron",
+  "version": "1.0.0",
+  "description": "Aplicativo Electron portátil para Nexo PDV com acesso a impressoras e balanças",
+  "author": "Emanuel Luis <emanuel@emasoftware.io>",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win portable",
+    "build-dir": "electron-builder --win --dir --config.win.signAndEditExecutable=false",
+    "build-linux": "electron-builder --linux AppImage"
+  },
+  "build": {
+    "appId": "com.nexopdv.app",
+    "productName": "Nexo PDV",
+    "portable": {
+      "artifactName": "NexoPDV-Portable.exe"
+    },
+    "win": {
+      "target": "portable"
+    },
+    "linux": {
+      "target": "AppImage",
+      "category": "Office"
+    },
+    "asar": true
+  },
+  "dependencies": {
+    "electron-store": "^8.1.0",
+    "fast-uri": "^3.0.6",
+    "node-thermal-printer": "^4.2.0",
+    "serialport": "^10.5.0",
+    "uri-js": "^4.4.1"
+  },
+  "devDependencies": {
+    "electron": "^25.0.0",
+    "electron-builder": "^24.4.0"
+  }
+}
