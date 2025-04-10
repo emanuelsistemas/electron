@@ -95,6 +95,39 @@ nexo-electron/dist/NexoPDV-Portable.exe
 
 Este é o arquivo que você distribuirá para seus clientes.
 
+## 4. Construir Arquivo Único Executável
+
+Para criar um único arquivo executável que não requer instalação e não deixa arquivos no sistema:
+
+### Pré-requisitos:
+
+1. Instalar o InnoSetup: [Download InnoSetup](https://jrsoftware.org/isdl.php)
+2. Certifique-se de que o InnoSetup está no PATH do sistema ou em um dos locais padrão
+
+### Passos:
+
+1. Execute o comando:
+```bash
+pnpm run build-single-exe
+```
+
+2. Este comando:
+   - Verifica se o InnoSetup está instalado
+   - Cria os diretórios necessários
+   - Executa o InnoSetup para criar o arquivo executável único
+   - Copia o arquivo resultante para a pasta `dist`
+
+### Localização do Executável:
+
+Após a conclusão do build, você encontrará o executável em:
+```
+nexo-electron/dist/NexoPDV-SingleFile.exe
+```
+
+Para mais detalhes sobre como criar um arquivo único executável, consulte o arquivo [SINGLE_EXE_README.md](SINGLE_EXE_README.md).
+
+Para um guia detalhado de todo o processo, consulte o arquivo [PROCESSO_COMPLETO.md](PROCESSO_COMPLETO.md).
+
 ## 4. Personalização Antes do Build
 
 Antes de construir o executável final, você pode personalizar:

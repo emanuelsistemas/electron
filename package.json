@@ -8,7 +8,8 @@
     "start": "electron .",
     "build": "electron-builder --win portable",
     "build-dir": "electron-builder --win --dir --config.win.signAndEditExecutable=false",
-    "build-linux": "electron-builder --linux AppImage"
+    "build-linux": "electron-builder --linux AppImage",
+    "build-single-exe": "node build-single-exe.js"
   },
   "build": {
     "appId": "com.nexopdv.app",

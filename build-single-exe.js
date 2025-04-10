@@ -86,15 +86,14 @@ function runCommand(command, options = {}) {
  */
 async function buildSingleExe() {
   try {
-    // Passo 1: Limpar diretório dist
-    log('Limpando diretório dist...');
-    if (fs.existsSync('dist')) {
-      fs.rmSync('dist', { recursive: true, force: true });
+    // Passo 1: Verificar se o diretório dist existe, se não, criar
+    log('Verificando diretório dist...');
+    if (!fs.existsSync('dist')) {
+      fs.mkdirSync('dist', { recursive: true });
     }
     
-    // Passo 2: Construir o aplicativo Electron
-    log('Construindo aplicativo Electron...');
-    runCommand('pnpm run build');
+    // Passo 2: Pular a construção do aplicativo Electron
+    log('Pulando a construção do aplicativo Electron...');
     
     // Passo 3: Verificar se o InnoSetup está instalado
     log('Verificando se o InnoSetup está instalado...');
@@ -128,7 +127,12 @@ async function buildSingleExe() {
       return;
     }
     
-    // Passo 4: Construir o instalador com InnoSetup
+    // Passo 4: Criar diretório Output se não existir
+    if (!fs.existsSync('Output')) {
+      fs.mkdirSync('Output', { recursive: true });
+    }
+    
+    // Passo 5: Construir o instalador com InnoSetup
     log('Construindo instalador com InnoSetup...');
     runCommand(`"${innoSetupPath}" innosetup.iss`);
     

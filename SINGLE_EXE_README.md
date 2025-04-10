@@ -84,6 +84,62 @@ Se você encontrar erros ao executar `pnpm run build-single-exe`, verifique:
 2. Se o build do Electron foi bem-sucedido
 3. Se você tem permissões para escrever na pasta `dist`
 
+### Erro "ffmpeg.dll não foi encontrado"
+
+Este é um problema comum ao executar o arquivo único. O erro ocorre porque o Electron precisa do arquivo ffmpeg.dll para funcionar corretamente, mas ele não está sendo incluído no pacote.
+
+**Solução**:
+
+1. Modifique o arquivo `innosetup.iss` para incluir explicitamente o arquivo ffmpeg.dll:
+
+```
+; Arquivo executável do Electron e DLLs necessárias
+Source: "node_modules\electron\dist\electron.exe"; DestDir: "{app}"; DestName: "{#MyAppExeName}"; Flags: ignoreversion
+Source: "node_modules\electron\dist\ffmpeg.dll"; DestDir: "{app}"; Flags: ignoreversion
+```
+
+2. Inclua também outras DLLs importantes:
+
+```
+Source: "node_modules\electron\dist\d3dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "node_modules\electron\dist\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "node_modules\electron\dist\libGLESv2.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "node_modules\electron\dist\vk_swiftshader.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "node_modules\electron\dist\vulkan-1.dll"; DestDir: "{app}"; Flags: ignoreversion
+```
+
+### Problema com o Electron não encontrando o caminho do aplicativo
+
+Quando o executável é iniciado, o Electron pode mostrar uma tela padrão em vez de carregar o aplicativo.
+
+**Solução**:
+
+1. Crie um arquivo `start-app.bat` com o seguinte conteúdo:
+
+```batch
+@echo off
+cd /d "%~dp0"
+"Nexo PDV.exe" .
+```
+
+2. Modifique o arquivo `innosetup.iss` para incluir este arquivo:
+
+```
+; Arquivo de inicialização
+Source: "start-app.bat"; DestDir: "{app}"; Flags: ignoreversion
+```
+
+3. Configure os ícones e o comando de execução para usar este arquivo:
+
+```
+[Icons]
+Name: "{commonprograms}\{#MyAppName}"; Filename: "{app}\start-app.bat"
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\start-app.bat"; Tasks: desktopicon
+
+[Run]
+Filename: "{app}\start-app.bat"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+```
+
 ### O arquivo único não executa
 
 Se o arquivo único não executar:
@@ -91,7 +147,10 @@ Se o arquivo único não executar:
 1. Verifique se o Visual C++ Redistributable está instalado
 2. Execute como administrador
 3. Desative temporariamente o antivírus
+4. Verifique se todas as DLLs necessárias estão incluídas no pacote
 
 ## Conclusão
 
-Com estas abordagens, você pode distribuir o Nexo PDV como um único arquivo executável, tornando a distribuição e o uso muito mais simples para os usuários finais.
+Com estas abordagens e soluções para problemas comuns, você pode distribuir o Nexo PDV como um único arquivo executável, tornando a distribuição e o uso muito mais simples para os usuários finais.
+
+Para um guia detalhado de todo o processo, desde a clonagem do repositório até a criação do arquivo executável único, consulte o arquivo [PROCESSO_COMPLETO.md](PROCESSO_COMPLETO.md).

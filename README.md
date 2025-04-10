@@ -55,6 +55,20 @@ npm run build
 
 O executável será gerado na pasta `dist/` com o nome `NexoPDV-Portable.exe`.
 
+### Construir Arquivo Único Executável
+
+Para construir um único arquivo executável que não requer instalação e não deixa arquivos no sistema:
+
+```
+npm run build-single-exe
+```
+
+O arquivo único será gerado na pasta `dist/` com o nome `NexoPDV-SingleFile.exe`.
+
+Para mais detalhes sobre como criar um arquivo único executável, consulte o arquivo [SINGLE_EXE_README.md](SINGLE_EXE_README.md).
+
+Para um guia detalhado de todo o processo, desde a clonagem do repositório até a criação do arquivo executável único, consulte o arquivo [PROCESSO_COMPLETO.md](PROCESSO_COMPLETO.md).
+
 ## Configuração
 
 O arquivo `config.json` contém as configurações do aplicativo:

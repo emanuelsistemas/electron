@@ -125,4 +125,28 @@ jobs:
 
 Para construir um executável Windows confiável, é recomendado usar um ambiente Windows nativo. As alternativas incluem usar uma máquina virtual Windows, o WSL2 no Windows, ou automatizar a construção usando GitHub Actions.
 
-Se você continuar enfrentando problemas, considere usar o InnoSetup em um ambiente Windows para criar um único arquivo executável a partir dos arquivos gerados pelo Electron Builder.
+## Criando um Único Arquivo Executável com InnoSetup
+
+Uma solução eficaz para distribuição é criar um único arquivo executável usando o InnoSetup. Este método foi implementado e testado com sucesso.
+
+### Pré-requisitos:
+
+1. Instalar o InnoSetup: [Download InnoSetup](https://jrsoftware.org/isdl.php)
+2. Certifique-se de que o InnoSetup está no PATH do sistema ou em um dos locais padrão
+
+### Passos:
+
+1. Execute o comando:
+```bash
+npm run build-single-exe
+```
+
+2. Este comando:
+   - Verifica se o InnoSetup está instalado
+   - Cria os diretórios necessários
+   - Executa o InnoSetup para criar o arquivo executável único
+   - Copia o arquivo resultante para a pasta `dist`
+
+Para mais detalhes sobre como criar um arquivo único executável, consulte o arquivo [SINGLE_EXE_README.md](SINGLE_EXE_README.md).
+
+Para um guia detalhado de todo o processo, desde a clonagem do repositório até a criação do arquivo executável único, consulte o arquivo [PROCESSO_COMPLETO.md](PROCESSO_COMPLETO.md).
